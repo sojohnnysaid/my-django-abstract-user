@@ -2,6 +2,9 @@
 
 A Django users application you can drop into your project. It's opinionated and can be used as your CustomUser's AbstractUser to inherit from.
 
+Instead of lots of templates for success pages etc, it will send
+messages to a single page.
+
 Unit tests and Functional tests were written using pytest and selenium.
 
 Example settings.py:
