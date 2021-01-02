@@ -1,3 +1,7 @@
+#-----------------------------------#
+# Shell Templates                   #
+#-----------------------------------#
+
 #------------------#
 # Test User exists #
 #------------------#
@@ -82,7 +86,7 @@ from django.urls import reverse
 from users import views
 
 request = RequestFactory().get(reverse('users:password_request_reset_link'))
-response = views.UsersPasswordResetRequestView.as_view()(request)
+response = views.UsersForgotPasswordResetRequestView.as_view()(request)
 response.template_name[0]
 
 
@@ -120,29 +124,3 @@ default_token_generator.check_token(user, token)
 default_token_generator.check_token(user, token)
 default_token_generator.check_token(user, token)
 default_token_generator.check_token(user, token)
-
-
-
-
-# log user in
-from django.contrib.auth import get_user_model
-from django.test import TestCase, Client
-from django.urls import reverse
-from random import randrange
-
-random_number = randrange(100000000)
-email = f'{random_number}john@gmail.com'
-password = 'pP@assW0rd'
-user = get_user_model().objects.create_user(email=email, password=password)
-user.is_active = True
-user.save()
-data = {'email': email, 'password': password}
-response = Client().post(reverse('users:login'), data, follow=True)
-
-
-# check variables in settings
-from django.conf import settings as conf_settings
-from django.urls import reverse_lazy
-
-settings_login_redirect_url = conf_settings.MY_ABSTRACT_USER_SETTINGS['users_messages_page']
-expected_url = reverse_lazy('therapybox:homepage')

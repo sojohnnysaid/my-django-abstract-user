@@ -58,7 +58,7 @@ class UserCanLogin(BaseFunctionalTest):
         self.browser.find_elements(By.ID, 'users_login_form_submit_button')[0].click()
 
         # he is taken to a new page
-        assert str(conf_settings.LOGIN_REDIRECT_URL) in self.browser.current_url
+        assert str(conf_settings.MY_ABSTRACT_USER_SETTINGS['users_messages_page']) in self.browser.current_url
 
         # the page tells him he is now logged in
         form_submitted_message = self.browser.find_elements(By.CLASS_NAME, 'message')[0].text

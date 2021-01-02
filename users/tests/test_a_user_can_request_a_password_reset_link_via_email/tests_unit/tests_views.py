@@ -32,7 +32,7 @@ class UsersPasswordResetRequestViewTest(BaseTestCase):
 
     def test_get_request_uses_expected_template(self):
         response = Client().get(reverse('users:password_request_reset_link'))
-        self.assertTemplateUsed(response, conf_settings.USERS_PASSWORD_RESET_REQUEST_TEMPLATE)
+        self.assertTemplateUsed(response, conf_settings.MY_ABSTRACT_USER_SETTINGS['templates']['password_reset_request'])
 
     def test_uses_expected_form_class(self):
         response = Client().get(reverse('users:password_request_reset_link'))
@@ -47,4 +47,4 @@ class UsersPasswordResetRequestViewTest(BaseTestCase):
 
     def test_redirects_on_post_success(self):
         response = Client().post(reverse('users:password_request_reset_link'), {'email': 'John@gmail.com'})
-        self.assertRedirects(response, str(conf_settings.USERS_PASSWORD_RESET_REQUEST_SUCCESS_URL))
+        self.assertRedirects(response, str(conf_settings.MY_ABSTRACT_USER_SETTINGS['users_messages_page']))

@@ -7,7 +7,6 @@ from users.managers import MyAbstractUserManager
 
 class MyAbstractUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(verbose_name='email address', max_length=80, unique=True)
-    first_name = models.CharField(max_length=40, null=True, blank=True)
 
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)

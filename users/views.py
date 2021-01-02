@@ -19,8 +19,8 @@ from django.conf import settings as conf_settings
 class UsersRegisterView(CreateView):
     model = get_user_model()
     form_class = forms.UsersRegisterForm
-    template_name = conf_settings.USERS_REGISTER_TEMPLATE
-    success_url = conf_settings.USERS_REGISTER_SUCCESS_URL
+    template_name = conf_settings.MY_ABSTRACT_USER_SETTINGS['templates']['register']
+    success_url = conf_settings.MY_ABSTRACT_USER_SETTINGS['users_messages_page']
 
     def form_valid(self, form):
         self.object = form.save()
@@ -31,7 +31,7 @@ class UsersRegisterView(CreateView):
 
 
 class UsersAccountActivationView(RedirectView):
-    url = conf_settings.USERS_ACTIVATE_USER_ACCOUNT_SUCCESS_URL
+    url = conf_settings.MY_ABSTRACT_USER_SETTINGS['users_messages_page']
     def get(self, request, *args, **kwargs):
         services.activate_user(request)
         return super().get(request, *args, **kwargs)
@@ -40,7 +40,7 @@ class UsersAccountActivationView(RedirectView):
 
 
 class UsersLoginView(LoginView):
-    template_name = conf_settings.USERS_LOGIN_TEMPLATE
+    template_name = conf_settings.MY_ABSTRACT_USER_SETTINGS['templates']['login']
 
     def form_valid(self, form):
         messages.success(self.request, f'Welcome back {form.user_cache.email}! You are logged in!')
@@ -48,7 +48,7 @@ class UsersLoginView(LoginView):
 
 
 class UsersLogoutView(LogoutView):
-    next_page = conf_settings.LOGOUT_URL
+    next_page = conf_settings.MY_ABSTRACT_USER_SETTINGS['users_messages_page']
 
     @method_decorator(never_cache)
     def dispatch(self, request, *args, **kwargs):
@@ -63,9 +63,9 @@ class UsersLogoutView(LogoutView):
 
 
 class UsersPasswordResetRequestView(FormView):
-    template_name = conf_settings.USERS_PASSWORD_RESET_REQUEST_TEMPLATE
+    template_name = conf_settings.MY_ABSTRACT_USER_SETTINGS['templates']['password_reset_request']
     form_class = forms.UsersPasswordResetRequestForm
-    success_url = conf_settings.USERS_PASSWORD_RESET_REQUEST_SUCCESS_URL
+    success_url = conf_settings.MY_ABSTRACT_USER_SETTINGS['users_messages_page']
 
     def form_valid(self, form):
         user = get_user_model().objects.get(email=form.cleaned_data['email'])
@@ -77,8 +77,8 @@ class UsersPasswordResetRequestView(FormView):
 
 INTERNAL_RESET_SESSION_TOKEN = '_password_reset_token'
 class UsersPasswordResetView(PasswordResetConfirmView):
-    template_name = conf_settings.USERS_PASSWORD_RESET_FORM_TEMPLATE
-    success_url = conf_settings.USERS_PASSWORD_RESET_FORM_SUCCESS_URL
+    template_name = conf_settings.MY_ABSTRACT_USER_SETTINGS['templates']['password_reset_form']
+    success_url = conf_settings.MY_ABSTRACT_USER_SETTINGS['users_messages_page']
 
     def form_valid(self, form):
         form.full_clean()

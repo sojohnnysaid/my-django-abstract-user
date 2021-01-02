@@ -25,9 +25,8 @@ class UsersRegisterFormTest(BaseTestCase):
     def test_renders_correct_fields(self):
         form = forms.UsersRegisterForm
         field_names = list(form.base_fields.keys())
-        self.assertEqual(['email', 'first_name', 'password1', 'password2'], field_names)
+        self.assertEqual(['email', 'password1', 'password2'], field_names)
 
     def test_fields_use_placeholder_attributes(self):
         response = self.client.get(reverse('users:register'))
-        self.assertIn('placeholder="first name"', response.rendered_content)
         self.assertIn('placeholder="email"', response.rendered_content)

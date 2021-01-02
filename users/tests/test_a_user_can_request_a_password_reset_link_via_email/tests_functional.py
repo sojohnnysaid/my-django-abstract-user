@@ -32,10 +32,6 @@ class BaseFunctionalTest(LiveServerTestCase):
         # enters email
         input = self.browser.find_elements(By.ID, 'id_email')[0]
         input.send_keys(f'{name}@gmail.com')
-        
-        # enters first name
-        input = self.browser.find_elements(By.ID, 'id_first_name')[0]
-        input.send_keys(f'{name}')
 
         # enters password
         input = self.browser.find_elements(By.ID, 'id_password1')[0]
@@ -98,7 +94,7 @@ class UserCanRequestPasswordResetLinkViaEmail(BaseFunctionalTest):
         self.browser.find_elements(By.ID, 'users_password_reset_request_form_submit_button')[0].click()
 
         # he is taken back to the homepage
-        assert str(conf_settings.USERS_PASSWORD_RESET_REQUEST_SUCCESS_URL) in self.browser.current_url
+        assert str(conf_settings.MY_ABSTRACT_USER_SETTINGS['users_messages_page']) in self.browser.current_url
 
         # the page tells him an email has been sent with a confirmation link
         form_submitted_message = self.browser.find_elements(By.CLASS_NAME, 'message')[0].text

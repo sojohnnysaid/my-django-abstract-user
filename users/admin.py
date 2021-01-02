@@ -48,7 +48,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = get_user_model()
-        fields = ('email', 'first_name', 'password', 'is_active')
+        fields = ('email', 'password', 'is_active')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -72,7 +72,7 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ('email', 'is_active',)
     fieldsets = (
         (None, {'fields': ('email', 'password', 'is_active')}),
-        ('Personal info', {'fields': ('first_name',)}),
+        ('Personal info', {'fields': ('',)}),
         ('Permissions', {'fields': ('is_admin', 'is_staff', 'groups')}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -81,7 +81,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'first_name', 'is_active', 'is_staff', 'password1', 'password2'),
+            'fields': ('email', 'is_active', 'is_staff', 'password1', 'password2'),
         }),
     )
     search_fields = ('email',)
@@ -92,4 +92,6 @@ class UserAdmin(BaseUserAdmin):
 
 
     # Now register the new UserAdmin...
+    # comment this out if you are overriding methods or attributes 
+    # in your own CustomUserAdmin within your app
 admin.site.register(get_user_model(), UserAdmin)

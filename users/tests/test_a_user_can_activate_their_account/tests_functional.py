@@ -34,10 +34,6 @@ class BaseFunctionalTest(LiveServerTestCase):
         # enters email
         input = self.browser.find_elements(By.ID, 'id_email')[0]
         input.send_keys(f'{name}@gmail.com')
-        
-        # enters first name
-        input = self.browser.find_elements(By.ID, 'id_first_name')[0]
-        input.send_keys(f'{name}')
 
         # enters password
         input = self.browser.find_elements(By.ID, 'id_password1')[0]
@@ -75,6 +71,6 @@ class UserCanActivateAccountUsingLinkOnceTest(BaseFunctionalTest):
         self.browser.get(activate_account_url)
         
         # John is taken to the home page
-        assert str(conf_settings.USERS_ACTIVATE_USER_ACCOUNT_SUCCESS_URL) in self.browser.current_url
+        assert str(conf_settings.MY_ABSTRACT_USER_SETTINGS['users_messages_page']) in self.browser.current_url
         navbar = self.browser.find_elements(By.CLASS_NAME, 'message')[0].text
         assert 'Your account has been activated! You can now login' in navbar

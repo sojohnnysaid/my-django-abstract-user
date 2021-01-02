@@ -37,7 +37,7 @@ class UsersPasswordResetViewTest(BaseTestCase):
         response = c.get(
             reverse('users:password-reset', kwargs={'uidb64': uidb64, 'token': token}), follow=True)
         
-        self.assertTemplateUsed(response, conf_settings.USERS_PASSWORD_RESET_FORM_TEMPLATE)
+        self.assertTemplateUsed(response, conf_settings.MY_ABSTRACT_USER_SETTINGS['templates']['password_reset_form'])
         
         response = c.post(
             reverse('users:password-reset', kwargs={'uidb64': uidb64, 'token': 'set-password'}),

@@ -91,7 +91,7 @@ class UserCanResetTheirPasswordUsingEmailedLinkOnce(BaseFunctionalTest):
         self.browser.find_elements(By.ID, 'users_password_reset_form_submit_button')[0].click()
 
         # the page reloads and John notices he is now on another page
-        assert str(conf_settings.USERS_PASSWORD_RESET_FORM_SUCCESS_URL) in self.browser.current_url
+        assert str(conf_settings.MY_ABSTRACT_USER_SETTINGS['users_messages_page']) in self.browser.current_url
 
         # there is a message on the page letting him know his password was reset successfully
         form_submitted_message = self.browser.find_elements(By.CLASS_NAME, 'message')[0].text

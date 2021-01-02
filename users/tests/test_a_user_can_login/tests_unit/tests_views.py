@@ -27,12 +27,7 @@ class LoginViewTest(BaseTestCase):
 
     def test_login_view_uses_expected_template(self):
         response = Client().get(reverse('users:login'))
-        self.assertTemplateUsed(response, conf_settings.USERS_LOGIN_TEMPLATE)
-
-    def test_settings_LOGIN_REDIRECT_URL_is_login_success_page(self):
-        data = {'username': self.email, 'password': self.password}
-        response = Client().post(reverse('users:login'), data, follow=True)
-        self.assertEqual(response.request['PATH_INFO'], conf_settings.LOGIN_REDIRECT_URL)
+        self.assertTemplateUsed(response, conf_settings.MY_ABSTRACT_USER_SETTINGS['templates']['login'])
 
     def test_success_page_displays_expected_message(self):
         data = {'username': self.email, 'password': self.password}

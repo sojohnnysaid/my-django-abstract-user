@@ -8,7 +8,7 @@ class UsersRegisterForm(UserCreationForm):
 
     class Meta:
         model = get_user_model()
-        fields = ['email', 'first_name', 'password1', 'password2']
+        fields = ['email', 'password1', 'password2']
 
     def clean_email(self):
         return self.cleaned_data['email'].lower()
@@ -16,7 +16,6 @@ class UsersRegisterForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['email'].widget.attrs['placeholder'] = 'email'
-        self.fields['first_name'].widget.attrs['placeholder'] = 'first name'
         self.fields['password1'].widget.attrs['placeholder'] = 'password'
         self.fields['password2'].widget.attrs['placeholder'] = 'confirm password'
 

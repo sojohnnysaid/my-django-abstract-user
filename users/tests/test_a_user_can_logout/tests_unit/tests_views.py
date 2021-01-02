@@ -20,4 +20,4 @@ class LogoutTest(BaseTestCase):
 
     def test_logout_redirects_user_to_expected_page(self):
         response = Client().get(reverse('users:logout'), follow=True)
-        self.assertRedirects(response, str(conf_settings.LOGIN_REDIRECT_URL))
+        self.assertRedirects(response, str(conf_settings.MY_ABSTRACT_USER_SETTINGS['users_messages_page']))
