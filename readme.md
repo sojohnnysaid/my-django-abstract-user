@@ -31,5 +31,5 @@ MY_ABSTRACT_USER_SETTINGS = {
 }
 ```
 
-When I drop this into my projects it's helpful to look at the tests I usually delete them once I start
+When I drop this into my projects it's helpful to look at the tests, however I usually delete them once I start
 adding fields to my app's custom user model.
