@@ -4,15 +4,17 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.core.exceptions import ValidationError
+from django.forms import widgets
 
 class UserCreationForm(forms.ModelForm):
     # A form for creating new users. Includes all the required fields, plus a repeated password
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    is_active = forms.BooleanField(initial=True)
 
     class Meta:
         model = get_user_model()
-        fields = '__all__'
+        fields = ('is_active',)
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -72,7 +74,7 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ('email', 'is_active',)
     fieldsets = (
         (None, {'fields': ('email', 'password', 'is_active')}),
-        ('Personal info', {'fields': ('',)}),
+        #('Personal info', {'fields': ('first_name',)}),
         ('Permissions', {'fields': ('is_admin', 'is_staff', 'groups')}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -81,7 +83,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'is_active', 'is_staff', 'password1', 'password2'),
+            'fields': ('email', 'is_admin', 'is_staff', 'is_active', 'password1', 'password2'),
         }),
     )
     search_fields = ('email',)

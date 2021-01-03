@@ -59,7 +59,7 @@ class UserCanActivateAccountUsingLinkOnceTest(BaseFunctionalTest):
         email = mail.outbox[0]
         assert 'Here is your activation link' in email.subject
 
-        url_search = re.search(r'http://.+/users/account-activation/\?uid=.+&token=.+$', email.body)
+        url_search = re.search(r'http://.+/account-activation/\?uid=.+&token=.+$', email.body)
 
         if not url_search:
             self.fail(f'Could not find url in email body:\n{email.body}')
@@ -72,5 +72,5 @@ class UserCanActivateAccountUsingLinkOnceTest(BaseFunctionalTest):
         
         # John is taken to the home page
         assert str(conf_settings.MY_ABSTRACT_USER_SETTINGS['users_messages_page']) in self.browser.current_url
-        navbar = self.browser.find_elements(By.CLASS_NAME, 'message')[0].text
-        assert 'Your account has been activated! You can now login' in navbar
+        success_message = self.browser.find_elements(By.CLASS_NAME, 'message')[0].text
+        assert 'Your account has been activated! You can now login' in success_message

@@ -22,7 +22,7 @@ class BaseTestCase(TestCase):
         response = Client().post(reverse_lazy('users:register'), data, follow=True)
         
         email = mail.outbox[0]
-        url_search = re.search(r'http://.+/users/account-activation/\?uid=.+&token=.+$', email.body)
+        url_search = re.search(r'http://.+/account-activation/\?uid=.+&token=.+$', email.body)
         self.link = url_search.group(0)
 
 

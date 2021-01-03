@@ -63,7 +63,7 @@ class UserCanResetTheirPasswordUsingEmailedLinkOnce(BaseFunctionalTest):
         email = mail.outbox[0]
         assert 'Here is your password reset link' in email.subject
         
-        url_search = re.search(r'http://.+/users/password-reset/.+/.+$', email.body)
+        url_search = re.search(r'http://.+/password-reset/.+/.+$', email.body)
         
         if not url_search:
             self.fail(f'Could not find url in email body:\n{email.body}')
@@ -76,7 +76,7 @@ class UserCanResetTheirPasswordUsingEmailedLinkOnce(BaseFunctionalTest):
         self.browser.get(password_reset_url)
         
         # John is taken to a password reset form page
-        assert '/users/password-reset/' in self.browser.current_url
+        assert '/password-reset/' in self.browser.current_url
 
         # He enters his password in the first password field
         new_password = 'mynewPp@assW0rd'

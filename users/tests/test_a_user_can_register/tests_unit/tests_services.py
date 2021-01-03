@@ -40,7 +40,7 @@ class SendUserActivationLinkTest(BaseTestCase):
         request = response.wsgi_request
         user = get_user_model().objects.get(email=email)
         activation_link = services.get_activation_link(request, user)
-        self.assertRegex(activation_link, r'http://.+/users/account-activation/\?uid=.+&token=.+$')
+        self.assertRegex(activation_link, r'http://.+/account-activation/\?uid=.+&token=.+$')
 
 
     @patch('users.services.send_mail')

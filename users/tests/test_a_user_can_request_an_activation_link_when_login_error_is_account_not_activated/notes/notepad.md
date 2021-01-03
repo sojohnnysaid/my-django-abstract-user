@@ -5,47 +5,61 @@
 *******************************
 
 📜 Feature:
-    ✅  A user can ...
+    ✅  A user can request an activation link when login error is account not activated
 
 
 ✅ TODO LIST 
-[] explain from users perspective
+[✅] explain from users perspective
 [] explain from framework perspective
 [] write unit tests
 [] pass functional test
 
 
 users perspective:
-    user does this...
-    user does that...
+    user tries to login
+    a message appears on the login page:
+        'This account has not been activated. Click here to resend activation link.'
+    user clicks the link
+    user sees a form to enter their registered username (email)
+    user is redirected to the homepage with a message:
+        "Account activation link has been re-sent to your registered email"
+    user clicks the email link
+    user is brough to the homepage with a message
+        "Your account has been activated you can now login!"
 
 
 
 framework perspective:
 
-    [] service
-        [] create methods:
-            [] some_method(arg1)           
-                [] responsibilities:
-                    [] method is responsible for...
+    [] service (re-user send_user_activation_link)
 
-    [] form:
-        [] responsibilities:
-            [] form is responsible for...
+    [] form
+        [] LoginForm:
+            [] responsibilities:
+                [] valid date user is_active status
+                    [] clean_email: valid if user exists and user is not active
+                    [] raise validation error:
+                        [] "This account has not been activated. Click here to resend activation link.
+        [] ReSendUserActivationLinkForm:
+            [] responsibilities:
+                [] collect user email
+                    [] clean_email: valid if user exists and user is not active
 
-    [] url name(name_of_url): 
+    [] url name(account_activation_request):
         [] create patterns:
-            [] my/url/pattern
+            [] account-activation-request
         [] view class:
-            [] ClassUrlCalls
+            [] UsersAccountActivationRequestView
 
     [] view MyViewName:
         [] responsibilities:
-            [] form is responsible for...
+            [] form_valid
+                [] call send_user_activation_link
+                [] redirect to success_url
 
     [] html templates
         [] create template:
-            [] my_template_name.html
+            [] account_activation_request.html
                 [] responsibilities:
 
 
@@ -54,3 +68,6 @@ framework perspective:
 ******* END xx/xx/xx
 *******
 *******************************
+
+He is on a new page account_activation_request
+client get is 200 status ok

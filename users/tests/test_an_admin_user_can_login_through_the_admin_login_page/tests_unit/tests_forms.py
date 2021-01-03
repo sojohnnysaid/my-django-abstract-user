@@ -10,7 +10,8 @@ class BaseTestCase(TestCase):
 
 
 
-class MyModelTest(BaseTestCase):
 
-    def test_model_does_what_is_expected(self):
+class MyFormTest(BaseTestCase):
+
+    def test_form_does_what_is_expected(self):
         pass

@@ -1,6 +1,7 @@
 from django.contrib.auth.views import PasswordResetConfirmView, LoginView, LogoutView
 from django.http import HttpResponseRedirect
 from django.http.response import HttpResponse
+from django.utils.safestring import mark_safe
 from django.views.generic.base import RedirectView
 from django.views.generic.edit import CreateView, FormView
 from django.urls import reverse_lazy
@@ -39,12 +40,39 @@ class UsersAccountActivationView(RedirectView):
 
 
 
+class UsersAccountActivationRequestView(FormView):
+    form_class = forms.UsersAccountActivationRequestForm
+    template_name = conf_settings.MY_ABSTRACT_USER_SETTINGS['templates']['account_activation_request']
+    success_url = conf_settings.MY_ABSTRACT_USER_SETTINGS['users_messages_page']
+
+    def form_valid(self, form):
+        user = get_user_model().objects.get(email=form.cleaned_data['email'])
+        services.send_user_activation_link(self.request, user)
+        return HttpResponseRedirect(self.get_success_url())
+
+
+
+
 class UsersLoginView(LoginView):
     template_name = conf_settings.MY_ABSTRACT_USER_SETTINGS['templates']['login']
+    form_class = forms.UsersLoginForm
 
     def form_valid(self, form):
         messages.success(self.request, f'Welcome back {form.user_cache.email}! You are logged in!')
         return super().form_valid(form)
+
+
+
+
+class UsersAdminLoginView(LoginView):
+    template_name = conf_settings.MY_ABSTRACT_USER_SETTINGS['templates']['admin_login']
+    form_class = forms.UsersAdminLoginForm
+
+    def form_valid(self, form):
+        messages.success(self.request, f'Welcome back {form.user_cache.email}! You are logged in! You are an admin!')
+        return HttpResponseRedirect(self.get_success_url())
+
+
 
 
 class UsersLogoutView(LogoutView):
@@ -59,6 +87,7 @@ class UsersLogoutView(LogoutView):
             messages.success(self.request, 'You are logged out!')
             return HttpResponseRedirect(next_page)
         return super().dispatch(request, *args, **kwargs)
+
 
 
 
@@ -89,3 +118,7 @@ class UsersPasswordResetView(PasswordResetConfirmView):
         login(self.request, form.user)
         logout(self.request)
         return HttpResponseRedirect(self.success_url)
+
+
+
+

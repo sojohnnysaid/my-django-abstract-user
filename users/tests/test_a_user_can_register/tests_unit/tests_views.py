@@ -65,7 +65,7 @@ class SendActivationLinkTest(BaseTestCase):
     def test_correct_arguments_passed_to_send_mail_service(self, mock_send_mail):
         self.register_user('John')
         link = mock_send_mail.call_args[0][1]
-        url = re.search(r'http://.+/users/account-activation/\?uid=.+&token=.+$', link)
+        url = re.search(r'http://.+/account-activation/\?uid=.+&token=.+$', link)
         mock_send_mail.assert_called_once_with(
             'Here is your activation link',
             url.group(0),

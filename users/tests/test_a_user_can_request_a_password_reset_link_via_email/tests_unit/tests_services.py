@@ -24,7 +24,7 @@ class SendPasswordResetLinkTest(BaseTestCase):
 
     def test_get_password_reset_link_returns_expected_url(self):
         request = RequestFactory().get('') # request path not important in this case
-        expected_url = r'http://.+/users/password-reset/.+/.+$'
+        expected_url = r'http://.+/password-reset/.+/.+$'
         generated_url = services.get_password_reset_link(request, self.user)
         self.assertRegex(generated_url, expected_url)
 

@@ -23,6 +23,7 @@ MY_ABSTRACT_USER_SETTINGS = {
     'admin_messages_page':reverse_lazy('app:url_name'),
     'templates': {
         'register': 'app/template.html',
+        'admin_login': 'app/template.html',
         'login': 'app/template.html',
         'password_reset_request': 'app/template.html',
         'password_reset_form': 'app/template.html',

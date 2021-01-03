@@ -29,8 +29,9 @@ class UsersPasswordResetViewTest(BaseTestCase):
         request = RequestFactory().get('') # request path not important in this case
 
         url = services.get_password_reset_link(request, self.user)
-        uidb64 = url.split('/')[5]
-        token = url.split('/')[6]
+        uidb64 = url.split('/')[4]
+        token = url.split('/')[5]
+        #print('\nURL:', url, '\nCheck the url above. This test might fail if you added to the url path. To fix just change [4], and [5] to taste!')
 
         new_password = 'AuniqueNewPW2rrrd$'
         c = Client()
@@ -49,8 +50,9 @@ class UsersPasswordResetViewTest(BaseTestCase):
         request = RequestFactory().get('') # request path not important in this case
 
         url = services.get_password_reset_link(request, self.user)
-        uidb64 = url.split('/')[5]
-        token = url.split('/')[6]
+        uidb64 = url.split('/')[4]
+        token = url.split('/')[5]
+        #print('\nURL:', url, '\nCheck the url above. This test might fail if you added to the url path. To fix just change [4], and [5] to taste!')
 
         UserModel = get_user_model()
         new_password = UserModel.objects.make_random_password()
