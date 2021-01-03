@@ -32,4 +32,4 @@ MY_ABSTRACT_USER_SETTINGS = {
 ```
 
 When I drop this into my projects it's helpful to look at the tests, however I usually delete them once I start
-adding fields to my app's custom user model.
+adding fields to my app's custom user model, and start writting my own tests specific to the app i'm working on.
