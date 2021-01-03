@@ -34,3 +34,7 @@ class MyAbstractUser(AbstractBaseUser, PermissionsMixin):
         if self.is_superuser:
             return True
         return False
+
+    def save(self, *args, **kwargs):
+        super().full_clean()
+        super().save(*args, **kwargs)
