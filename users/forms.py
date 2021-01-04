@@ -38,7 +38,11 @@ class UsersRegisterForm(ErrorListMixin, UserCreationForm):
 
     class Meta:
         model = get_user_model()
-        fields = ['email', 'password1', 'password2']
+        fields = [
+            'email', 'password1', 'password2', 'facility_name', 'company_name', 'phone_number',
+            'point_of_contact', 'address_line_1', 'address_line_2', 'suburb', 'city',
+            'postcode', 'shipping_region', 'agreed_to_terms_and_conditions'
+        ]
 
     def clean_email(self):
         return self.cleaned_data['email'].lower()
@@ -48,6 +52,8 @@ class UsersRegisterForm(ErrorListMixin, UserCreationForm):
         self.fields['email'].widget.attrs['placeholder'] = 'email'
         self.fields['password1'].widget.attrs['placeholder'] = 'password'
         self.fields['password2'].widget.attrs['placeholder'] = 'confirm password'
+        for field in self.fields:
+            self.fields[field].required = True
 
 
 class UsersPasswordResetRequestForm(ErrorListMixin, forms.Form):
