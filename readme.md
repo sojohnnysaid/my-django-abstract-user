@@ -24,6 +24,7 @@ MY_ABSTRACT_USER_SETTINGS = {
     'templates': {
         'register': 'app/template.html',
         'admin_login': 'app/template.html',
+        'account_activation_request': 'app/template.html',
         'login': 'app/template.html',
         'password_reset_request': 'app/template.html',
         'password_reset_form': 'app/template.html',
