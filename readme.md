@@ -44,9 +44,10 @@ MY_ABSTRACT_USER_SETTINGS = {
 ```
 
 4. To run all unit and functional tests create a pytest.ini file in the root folder with the following:
+(Make sure to change the DJANGO_SETTINGS_MODULE value to your app name example: your_main_app.settings)
 ```
 [pytest]
-DJANGO_SETTINGS_MODULE = core.settings ; < --- name according to your root project name!
+DJANGO_SETTINGS_MODULE = core.settings
 python_files = tests.py tests_*.py *_tests.py
 addopts = -x -s
 ; x = stops instantly on first error
