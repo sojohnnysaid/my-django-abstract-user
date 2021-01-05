@@ -11,11 +11,22 @@ Unit tests and Functional tests were written using pytest and selenium.
 
 Example settings.py:
 
+
+
+## Installation
+
+1. Drop the users folder in your project
+
+2. Add `path('', include('users.urls')),` to your main project urls.py file
+
+3. Add users.apps.UsersConfig to your installed apps in settings.py and add the following settings variable:
 ```py
+from django.urls import reverse_lazy
+
 #---- settings variables from Django
-AUTH_USER_MODEL = 'users.YourCustomUser'
-LOGIN_REDIRECT_URL = reverse_lazy('app:url_name')
-LOGOUT_URL = reverse_lazy('app:url_name')
+AUTH_USER_MODEL = 'users.MyAbstractUser'
+LOGIN_REDIRECT_URL = reverse_lazy('users:homepage')
+LOGOUT_URL = reverse_lazy('users:homepage')
 #----
 
 MY_ABSTRACT_USER_SETTINGS = {
@@ -32,5 +43,20 @@ MY_ABSTRACT_USER_SETTINGS = {
 }
 ```
 
-When I drop this into my projects it's helpful to look at the tests, however I usually delete them once I start
-adding fields to my app's custom user model, and start writting my own tests specific to the app i'm working on.
+4. To run all unit and functional tests create a pytest.ini file in the root folder with the following:
+```
+[pytest]
+DJANGO_SETTINGS_MODULE = core.settings ; < --- name according to your root project name!
+python_files = tests.py tests_*.py *_tests.py
+addopts = -x -s
+; x = stops instantly on first error
+```
+
+5. pip install -r users/test_requirements.txt
+
+6. run the command pytest to run all tests
+
+Change the settings variable if you want to move templates to other apps, add your own user which
+inherits from MyAbstractUser, or change the redirect behavior.
+
+Hope this helps!

@@ -1,5 +1,5 @@
 from django.test import TestCase, Client, RequestFactory
-from django.urls import reverse
+from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
 from django.core import mail
 
@@ -22,7 +22,7 @@ class BaseTestCase(TestCase):
             'password1': 'p@assW0rd',
             'password2': 'p@assW0rd'}
 
-        self.response = Client().post(reverse('users:register'), data)
+        self.response = Client().post(reverse_lazy('users:register'), data)
 
 
 
