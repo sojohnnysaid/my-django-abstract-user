@@ -19,15 +19,15 @@ LOGOUT_URL = reverse_lazy('app:url_name')
 #----
 
 MY_ABSTRACT_USER_SETTINGS = {
-    'users_messages_page': reverse_lazy('app:url_name'),
-    'admin_messages_page':reverse_lazy('app:url_name'),
+    'users_messages_page': reverse_lazy('users:homepage'),
+    'admin_messages_page':reverse_lazy('users:homepage'),
     'templates': {
-        'register': 'app/template.html',
-        'admin_login': 'app/template.html',
-        'account_activation_request': 'app/template.html',
-        'login': 'app/template.html',
-        'password_reset_request': 'app/template.html',
-        'password_reset_form': 'app/template.html',
+        'register': 'users/register.html',
+        'admin_login': 'users/admin_login.html',
+        'login': 'users/login.html',
+        'account_activation_request': 'users/account_activation_request.html',
+        'password_reset_request': 'users/password_reset_request.html',
+        'password_reset_form': 'users/password_reset_form.html',
     } 
 }
 ```

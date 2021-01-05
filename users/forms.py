@@ -39,9 +39,7 @@ class UsersRegisterForm(ErrorListMixin, UserCreationForm):
     class Meta:
         model = get_user_model()
         fields = [
-            'email', 'password1', 'password2', 'facility_name', 'company_name', 'phone_number',
-            'point_of_contact', 'address_line_1', 'address_line_2', 'suburb', 'city',
-            'postcode', 'shipping_region', 'agreed_to_terms_and_conditions'
+            'email', 'password1', 'password2',
         ]
 
     def clean_email(self):

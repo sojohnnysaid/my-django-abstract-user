@@ -1,5 +1,6 @@
 # users urls
 from django.urls import path
+from django.views.generic.base import TemplateView
 from users.views import (
     UsersRegisterView, 
     UsersAccountActivationView,
@@ -12,6 +13,7 @@ from users.views import (
 
 app_name = 'users'
 urlpatterns = [
+    path('', TemplateView.as_view(template_name='users/homepage.html'), name='homepage'),
     path('register/', UsersRegisterView.as_view(), name='register'),
     path('account-activation/', UsersAccountActivationView.as_view(), name='account_activation'),
     path('account-activation-request/', UsersAccountActivationRequestView.as_view(), name='account_activation_request'),
